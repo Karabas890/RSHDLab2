@@ -1,0 +1,46 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Maven
+target/
+
+# Gradle
+build/
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Kotlin specific
+*.kotlin_module
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Compiled files
+*.class
+
+# Temporary files
+*.swp
+*~
+*.bak
+*.tmp
+
+# Virtual Machine crash logs
+hs_err_pid*
+
+# Local environment variables
+.env
+*.local
+
+# IntelliJ run/debug configs (optional)
+.idea/runConfigurations/
+
+# Node (if frontend present)
+node_modules/
+dist/

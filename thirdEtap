@@ -1,0 +1,60 @@
+# под пользователем postgres2
+mkdir -p $HOME/cwv52
+# подключитесь в psql как суперпользователь:
+psql -h pg121 -p 9000 -U postgres2 -d postgres
+-- создаём tablespace:
+CREATE TABLESPACE cwv52 LOCATION '/var/db/postgres2/cwv52';
+--Отключить все подключения к template1 (обычно их нет, но на всякий случай):
+UPDATE pg_database SET datallowconn = FALSE WHERE datname = 'template1';
+--Завершить существующие сессии:
+SELECT pg_terminate_backend(pid)
+  FROM pg_stat_activity
+ WHERE datname = 'template1';
+--Удалить старую template1:
+DROP DATABASE template1;
+--Создать чистую template1 на основе template0:
+CREATE DATABASE template1
+  WITH TEMPLATE = template0
+  TABLESPACE = cwv52
+  OWNER = postgres2
+  ENCODING = 'KOI8-R'
+  LC_COLLATE = 'ru_RU.KOI8-R'
+  LC_CTYPE = 'ru_RU.KOI8-R'
+  IS_TEMPLATE = TRUE;
+--Создать новую базу bestpinkfood на основе template0
+CREATE DATABASE bestpinkfood WITH TEMPLATE template0 OWNER postgres2;
+--Создадим новую роль, предоставив необходимые права, разрешим подключение к базе.
+CREATE  ROLE  new_role  LOGIN  PASSWORD  'new';
+GRANT  CONNECT  ON DATABASE  bestpinkfood  TO  new_role;
+-- выдаём право на использование нового tablespace
+GRANT CREATE ON TABLESPACE cwv52 TO new_role;
+--Сначала подключись к базе bestpinkfood как суперпользователь
+psql -h pg121 -p 9000 -U postgres2 -d bestpinkfood
+--Создадим тестовые таблицы и дадим на них нужные права:
+CREATE TABLE test_table1 (
+id SERIAL PRIMARY KEY,
+NAME TEXT NOT NULL,
+VALUE INTEGER
+) TABLESPACE cwv52;
+GRANT INSERT ON TABLE "public"."test_table1" TO new_role;
+GRANT USAGE, SELECT ON SEQUENCE PUBLIC.TEST_TABLE1_ID_SEQ TO NEW_ROLE;
+--Заполним теблицы тестовыми данными от новой роли
+psql -h pg121 -p 9000 -d bestpinkfood -U new_role
+INSERT INTO test_table1 (NAME, VALUE) VALUES
+('A', 1),
+('B', 2),
+('C', 3);
+--Выведем список всех табличных пространств кластера и содержащиеся в них объекты
+SELECT
+  CASE WHEN ROW_NUMBER() OVER (PARTITION BY COALESCE(t.spcname,
+'pg_default') ORDER BY c.relname) = 1
+       THEN COALESCE(t.spcname, 'pg_default')
+       ELSE NULL
+  END AS spcname,
+  c.relname
+FROM pg_tablespace t
+FULL JOIN pg_class c ON c.reltablespace = t.oid
+ORDER BY COALESCE(t.spcname, 'pg_default'), c.relname;
+
+
+

@@ -1,0 +1,30 @@
+# Слушать все IP-адреса
+listen_addresses = '*'
+port = 9000
+
+# Поддержка многопользовательской работы
+max_connections = 100                # можно адаптировать
+
+# Использование памяти (RAM: 16ГБ, диск — HDD)
+shared_buffers = 1GB                 # ~25% от RAM
+temp_buffers = 64MB
+work_mem = 64MB                      # может зависеть от числа подключений
+effective_cache_size = 8GB          # предположительный объём кэширования ОС
+checkpoint_timeout = 10min
+fsync = on
+commit_delay = 10000                # 10ms (оптимально для HDD)
+
+# Формат логирования
+log_destination = 'csvlog'
+logging_collector = on
+log_directory = 'log'
+log_filename = 'postgresql-%a'
+log_truncate_on_rotation = on
+log_rotation_age = 1d
+log_rotation_size = 0
+log_statement = 'none'
+log_connections = on
+log_disconnections = on
+log_min_messages = info
+
+pg_ctl -D "$PGDATA" -l "$PGDATA/logfile" start

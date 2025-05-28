@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="99673934-57fb-4352-87bb-538700b29957" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FirstEtap.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSHDLab2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SecondEtap.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ThirdEtapNew.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pg_hba_new.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postgresql.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postgresql_new.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thirdEtap" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2wfU2YiWNwD4nTWmskq5FvNXX44" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/basti/IdeaProjects/BLPS Lab3+/BLPS",
+    "nodejs_package_manager_path": "npm"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\basti\IdeaProjects\RSHDLab2" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="99673934-57fb-4352-87bb-538700b29957" name="Changes" comment="" />
+      <created>1746431917792</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1746431917792</updated>
+      <workItem from="1746431919342" duration="10440000" />
+      <workItem from="1747220449992" duration="29000" />
+      <workItem from="1747613202730" duration="20524000" />
+      <workItem from="1747913616531" duration="26000" />
+      <workItem from="1748430129844" duration="8091000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
