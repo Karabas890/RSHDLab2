@@ -31,6 +31,51 @@ DROP TABLE IF EXISTS test_table1;
 #удаляем все каталоги
 rm -rf ~/qfg95 ~/twv39 ~/ykk83
 
+#просмотр всех ролей
+SELECT * FROM pg_roles;
+
+psql -h 192.168.1.100 -p 9426 -U postgres2 -d postgres
+
+
+SELECT
+    CASE WHEN ROW_NUMBER() OVER (PARTITION BY COALESCE(t.spcname, 'pg_default') = 1
+         THEN COALESCE(t.spcname, 'pg_default')
+         ELSE ''
+    END AS tablespace,
+    COALESCE(t.spcowner::regrole::text, 'postgres') AS owner,
+    pg_tablespace_location(t.oid) AS location,
+    CASE c.relkind
+        WHEN 'r' THEN 'table'
+        WHEN 'i' THEN 'index'
+        WHEN 'S' THEN 'sequence'
+        WHEN 'v' THEN 'view'
+        WHEN 'm' THEN 'materialized view'
+        WHEN 'c' THEN 'composite type'
+        WHEN 't' THEN 'TOAST table'
+        ELSE c.relkind::text
+    END AS object_type,
+    n.nspname AS schema_name,
+    c.relname AS object_name,
+    pg_size_pretty(pg_total_relation_size(c.oid)) AS total_size,
+    CASE
+        WHEN c.relkind IN ('r','m') THEN (SELECT count(*) FROM pg_index i WHERE i.indrelid = c.oid)
+        ELSE NULL
+    END AS indexes_count
+FROM
+    pg_tablespace t
+FULL JOIN
+    pg_class c ON c.reltablespace = t.oid
+LEFT JOIN
+    pg_namespace n ON c.relnamespace = n.oid
+WHERE
+    c.relname IS NOT NULL  -- Исключаем строки без объектов
+    AND n.nspname NOT LIKE 'pg_%'  -- Исключаем системные схемы
+    AND n.nspname != 'information_schema'
+ORDER BY
+    COALESCE(t.spcname, 'pg_default'),
+    n.nspname,
+    c.relname;
+
 
 
 
