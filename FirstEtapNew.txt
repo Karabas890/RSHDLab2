@@ -1,4 +1,6 @@
 ssh -J s368527@helios.cs.ifmo.ru:2222 postgres2@pg121
+
+
 PGDATA=$HOME/ykk83
 export PGDATA
 # Создание каталога под кластер

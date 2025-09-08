@@ -84,12 +84,21 @@ CREATE TABLE test_table_lw2 (
   name TEXT NOT NULL,
   value INTEGER
 ) TABLESPACE twv39;
+CREATE TABLE test_table_lw3 (
+  id SERIAL PRIMARY KEY
+) TABLESPACE twv39;
 
 -- Дать права на вставку и использование sequence роли new_role
 GRANT INSERT, SELECT, UPDATE, DELETE ON test_table_lw1 TO new_role;
 GRANT USAGE, SELECT ON SEQUENCE test_table_lw1_id_seq TO new_role;
 GRANT INSERT, SELECT, UPDATE, DELETE ON test_table_lw2 TO new_role;
 GRANT USAGE, SELECT ON SEQUENCE test_table_lw2_id_seq TO new_role;
+GRANT INSERT, SELECT, UPDATE, DELETE ON test_table_lw3  TO new_role;
+GRANT USAGE, SELECT ON SEQUENCE test_table_lw3_id_seq TO new_role;
+GRANT INSERT, SELECT, UPDATE, DELETE ON test_table10 TO new_role;
+GRANT USAGE, SELECT ON SEQUENCE test_table10_id_seq TO new_role;
+
+
 
 -- Вставляем
 psql -h localhost -p 9426 -U new_role -d lazywhitewood

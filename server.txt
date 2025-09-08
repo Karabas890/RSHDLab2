@@ -81,5 +81,7 @@ ORDER BY
 
 
 
-
+chmod +x /path/to/your/backup_script.sh
+crontab -e
+0 3 * * 1 /path/to/your/backup_script.sh
 
