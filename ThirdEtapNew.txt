@@ -57,7 +57,7 @@ CREATE TABLE test_table_postgres (
 ) TABLESPACE twv39;
 
 -- Дать права на вставку и использование sequence роли new_role
-GRANT INSERT, SELECT ON test_table_postgres TO new_role;
+GRANT INSERT, SELECT, UPDATE, DELETE ON test_table_postgres TO new_role;
 GRANT USAGE, SELECT ON SEQUENCE test_table_postgres_id_seq TO new_role;
 
 -- Подключиться к базе postgres
@@ -73,24 +73,38 @@ SELECT * FROM test_table_lw;
 psql -p 9426 -U postgres2 -d lazywhitewood
 
 -- Создать таблицу в таблицпространстве twv39
-CREATE TABLE test_table_lw (
+CREATE TABLE test_table_lw1 (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  value INTEGER
+) TABLESPACE twv39;
+-- Создать таблицу в таблицпространстве twv39
+CREATE TABLE test_table_lw2 (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
   value INTEGER
 ) TABLESPACE twv39;
 
 -- Дать права на вставку и использование sequence роли new_role
-GRANT INSERT, SELECT ON test_table_lw TO new_role;
-GRANT USAGE, SELECT ON SEQUENCE test_table_lw_id_seq TO new_role;
+GRANT INSERT, SELECT, UPDATE, DELETE ON test_table_lw1 TO new_role;
+GRANT USAGE, SELECT ON SEQUENCE test_table_lw1_id_seq TO new_role;
+GRANT INSERT, SELECT, UPDATE, DELETE ON test_table_lw2 TO new_role;
+GRANT USAGE, SELECT ON SEQUENCE test_table_lw2_id_seq TO new_role;
 
 -- Вставляем
 psql -h localhost -p 9426 -U new_role -d lazywhitewood
-INSERT INTO test_table_lw (name, value) VALUES
+INSERT INTO test_table_lw1 (name, value) VALUES
   ('X', 10),
   ('Y', 20),
   ('Z', 30);
 --проверка
-SELECT * FROM test_table_lw;
+SELECT * FROM test_table_lw1;
+INSERT INTO test_table_lw2 (name, value) VALUES
+  ('J', 100),
+  ('K', 200),
+  ('L', 300);
+--проверка
+SELECT * FROM test_table_lw2;
 
 
 

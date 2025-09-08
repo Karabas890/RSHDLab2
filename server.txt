@@ -1,3 +1,4 @@
+PGDATA=$HOME/ykk83
 pg_ctl -D "$PGDATA" stop
 pg_ctl -D "$PGDATA" stop -m fast
 pg_ctl -D "$PGDATA" restart -l "$PGDATA/logfile"
